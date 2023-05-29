@@ -2,6 +2,13 @@
 
 ## Installation
 
+```
+cargo install cargo-tarpaulin
+cargo install cargo-audit # Optional, if you want to run security audits
+```
+
+Additionally, you will need to install the following tools:
+
 ### On Linux or in Docker
 
 ```
@@ -29,4 +36,17 @@ cargo install cargo-watch
 Run the below command in the root of the project. It will automatically recompile, test, and run the project when you change a file.
 ```
 cargo watch -x check -x test -x run
+```
+
+
+### Code Coverage
+
+```
+cargo tarpaulin --ignore-tests
+```
+
+### Security Audit
+
+```
+cargo audit
 ```
