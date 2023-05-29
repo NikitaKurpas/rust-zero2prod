@@ -5,6 +5,7 @@
 ```
 cargo install cargo-tarpaulin
 cargo install cargo-audit # Optional, if you want to run security audits
+cargo install cargo-watch
 ```
 
 Additionally, you will need to install the following tools:
@@ -13,7 +14,6 @@ Additionally, you will need to install the following tools:
 
 ```
 sudo apt-get install lld clang
-cargo install cargo-watch
 ```
 
 
@@ -21,14 +21,12 @@ cargo install cargo-watch
 
 ```
 brew install michaeleisel/zld/zld
-cargo install cargo-watch
 ```
 
 ### On Windows
 ```
 cargo install -f cargo-binutils
 rustup component add llvm-tools-preview
-cargo install cargo-watch
 ```
 
 ## Usage
