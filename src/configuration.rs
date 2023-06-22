@@ -1,3 +1,14 @@
+// read application settings from "configuration.yaml" located in project root
+pub fn get_configuration() -> Result<Settings, config::ConfigError> {
+    let settings = config::Config::builder()
+        .add_source(
+            config::File::new("configuration.yaml", config::FileFormat::Yaml)
+        )
+        .build()?;
+
+    settings.try_deserialize::<Settings>()
+}
+
 #[derive(serde::Deserialize)]
 pub struct Settings {
     pub database: DatabaseSettings,
@@ -13,13 +24,15 @@ pub struct DatabaseSettings {
     pub database_name: String,
 }
 
-// read application settings from "configuration.yaml" located in project root
-pub fn get_configuration() -> Result<Settings, config::ConfigError> {
-    let settings = config::Config::builder()
-        .add_source(
-            config::File::new("configuration.yaml", config::FileFormat::Yaml)
+impl DatabaseSettings {
+    pub fn connection_string(&self) -> String {
+        format!(
+            "postgres://{}:{}@{}:{}/{}",
+            self.username,
+            self.password,
+            self.host,
+            self.port,
+            self.database_name
         )
-        .build()?;
-
-    settings.try_deserialize::<Settings>()
+    }
 }
