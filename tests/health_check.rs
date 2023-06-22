@@ -1,5 +1,5 @@
+use sqlx::{Connection, PgConnection};
 use std::net::TcpListener;
-use sqlx::{PgConnection, Connection};
 use zero2prod::configuration::get_configuration;
 
 #[tokio::test]
@@ -7,14 +7,14 @@ async fn health_check_works() {
     // Arrange
     let address = spawn_app();
     let client = reqwest::Client::new();
-    
+
     // Act
     let response = client
         .get(&format!("{}/health_check", &address))
         .send()
         .await
         .expect("Failed to execute request.");
-    
+
     // Assert
     assert_eq!(response.status(), 200);
     assert_eq!(Some(0), response.content_length());
@@ -63,7 +63,7 @@ async fn subscribe_returns_400_when_data_is_missing() {
     let test_cases = vec![
         ("name=test%20mctest", "missing the email"),
         ("email=test%40example.com", "missing the name"),
-        ("", "missing both name and email")
+        ("", "missing both name and email"),
     ];
 
     for (invalid_body, error_message) in test_cases {
@@ -86,8 +86,7 @@ async fn subscribe_returns_400_when_data_is_missing() {
 }
 
 fn spawn_app() -> String {
-    let listener = TcpListener::bind("127.0.0.1:0")
-        .expect("Failed to bind random port.");
+    let listener = TcpListener::bind("127.0.0.1:0").expect("Failed to bind random port.");
     let port = listener.local_addr().unwrap().port();
     let server = zero2prod::startup::run(listener).expect("Failed to bind address.");
     let _ = tokio::spawn(server);
