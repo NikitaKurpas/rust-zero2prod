@@ -9,7 +9,8 @@ services:
       - ../.env.template # use the template as default
       - ../.env # override with a local file
     volumes:
-      - ../..:/workspaces:cached
+      - devcontainer-cargo-cache-shared:/usr/local/cargo # make the cargo cache persistent in a Docker Volume.
+      - devcontainer-build-cache:/workspaces/rust-zero2prod/target # make the build cache persistent in a Docker Volume.
     # Overrides default command so things don't shut down after the process ends.
     command: sleep infinity
     # Runs sandbox on the same network as the database container, allows "forwardPorts" in devcontainer.json function.
@@ -35,4 +36,6 @@ networks:
   devcontainer-net:
 
 volumes:
+  devcontainer-cargo-cache-shared:
+  devcontainer-build-cache:
   postgres-data:
