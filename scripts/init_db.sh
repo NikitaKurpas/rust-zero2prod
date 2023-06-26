@@ -9,7 +9,7 @@ if ! [ -x "$(command -v sqlx)" ]; then
   exit 1
 fi
 
-POSTGRES_USER=${POSTGRES_USER:=postgres}
+POSTGRES_USER="${POSTGRES_USER:=postgres}"
 POSTGRES_PASSWORD="${POSTGRES_PASSWORD:=postgres}"
 POSTGRES_DB="${POSTGRES_DB:=newsletter}"
 POSTGRES_HOST="${POSTGRES_HOST:=postgres}"
