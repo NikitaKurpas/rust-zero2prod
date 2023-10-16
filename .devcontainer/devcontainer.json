@@ -14,7 +14,7 @@
 	// "forwardPorts": [],
 
 	// Use 'initializeCommand' to run commands on the host machine before the container is created.
-	"initializeCommand": "if [ ! -f ../.env ]; then cp ../.env.template ../.env; fi"
+	"initializeCommand": "if [ ! -f .env ]; then cp .env.template .env; fi"
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "rustc --version",
