@@ -5,5 +5,5 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 
 RUN cargo install cargo-tarpaulin cargo-watch cargo-expand cargo-udeps
 
-RUN cargo install --version="~0.6" sqlx-cli --no-default-features \
+RUN cargo install --version="~0.7" sqlx-cli --no-default-features \
   --features rustls,postgres
